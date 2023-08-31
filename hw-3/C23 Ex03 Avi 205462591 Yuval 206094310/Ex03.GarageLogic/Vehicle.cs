@@ -11,14 +11,16 @@ namespace Ex03.GarageLogic
         private string m_ModelName;
         private string m_LicenseNumber;
         private float m_PercentageOfEnergyRemaining;
+        private int m_NumOfWheels;
         private List<Wheel> m_WheelsList;
 
-        public Vehicle(string i_ModelName, string i_LicenseNumber, float i_CurrentPercentageOfEnergyRemaining)
+        public Vehicle(string i_ModelName, string i_LicenseNumber, float i_CurrentPercentageOfEnergyRemaining, int i_NumOfWheels)
         {
             this.m_ModelName = i_ModelName;
             this.m_LicenseNumber = i_LicenseNumber;
             this.m_PercentageOfEnergyRemaining = i_CurrentPercentageOfEnergyRemaining;
-            this.m_WheelsList = new List<Wheel>();
+            this.m_NumOfWheels = i_NumOfWheels; 
+            this.m_WheelsList = new List<Wheel>(i_NumOfWheels);
         }
 
         public string ModelName
@@ -36,10 +38,14 @@ namespace Ex03.GarageLogic
             get { return m_PercentageOfEnergyRemaining; }
         }
 
-        public List<Wheel> NumOfWheels
+        public List<Wheel> Wheels
         {
             get { return this.m_WheelsList; } 
             set { this.m_WheelsList = value; }
+        }
+        public int NumOfWheels
+        {
+            get { return this.m_NumOfWheels; }
         }
     }
 }
