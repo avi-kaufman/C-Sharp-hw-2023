@@ -19,9 +19,17 @@ namespace Ex03.GarageLogic
         private eLicenseType m_LicenseType;
         private int m_EngineCapacityInCubicCentimeter;
 
-        public Motorcycle(string i_ModelName, string i_LicenseNumber, float i_CurrentPercentageOfEnergyRemaining,
+        public Motorcycle(string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity,
             eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
-            : base(i_ModelName, i_LicenseNumber, i_CurrentPercentageOfEnergyRemaining, 2)
+            : base(i_ModelName, i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, 2)
+        {
+            this.m_LicenseType = i_LicenseType;
+            this.m_EngineCapacityInCubicCentimeter = i_EngineCapacityInCubicCentimeter;
+        }
+
+        public Motorcycle(string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, 
+            eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
+            : base(i_ModelName, i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, 2)
         {
             this.m_LicenseType = i_LicenseType;
             this.m_EngineCapacityInCubicCentimeter = i_EngineCapacityInCubicCentimeter;
@@ -39,17 +47,10 @@ namespace Ex03.GarageLogic
             set { m_EngineCapacityInCubicCentimeter = value; }
 
         }
-        /// <summary>
-        /// ///////
-        /// </summary>
-        /// <returns></returns>
+
         public override string ToString()
         {
-            return "";
-        }
-        public override bool Equals(Object i_Obj)
-        {
-            return false;
+            return string.Format({0}\nLicenseType: {1}\nEngineCapacityInCubicCentimeter: {2} ,base.ToString(), this.m_LicenseType.ToString(), this.m_EngineCapacityInCubicCentimeter);
         }
     }
 }
