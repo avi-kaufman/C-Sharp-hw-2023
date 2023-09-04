@@ -32,6 +32,18 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public float CurrentEnergy 
+        {
+            get { return m_CurrentEnergy; }
+            set { m_CurrentEnergy = value; }
+        }
+
+        public float EngineCapcity
+        {
+            get { return m_CurrentEnergy; }
+            set { m_CurrentEnergy = value; }
+        }
+
         public virtual void AddEnergy(float i_EnergyToAdd)
         {
             if (m_CurrentEnergy + i_EnergyToAdd > m_EngineCapcity || i_EnergyToAdd < 0)

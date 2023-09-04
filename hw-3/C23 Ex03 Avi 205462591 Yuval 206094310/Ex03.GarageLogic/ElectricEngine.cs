@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
 		public ElectricEngine(float i_CurrentEnergy, float i_EngineCapcity)
 			: base(i_CurrentEnergy, i_EngineCapcity) { }
 
-		public void ChargeEngine(int i_HoursToCharge)
+		public void ChargeEngine(float i_HoursToCharge)
 		{
 			AddEnergy(i_HoursToCharge);
 		}

@@ -10,11 +10,11 @@ namespace Ex03.GarageLogic
     {
         private string m_ModelName;
         private string m_LicenseNumber;
-        private Engine = m_Engine;
+        private Engine m_Engine;
         private List<Wheel> m_WheelsList;
         private eCurrentCarStatus m_CurrentStatus;
 
-        public enum eCurrentCarStatus
+        internal enum eCurrentCarStatus
         {
             NotFixedYet,
             Fixed,
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
 
         public Engine Engine
         {
-            get { return m_Engine}
+            get { return m_Engine; }
             set { m_Engine  = value; }  
         }
 
@@ -84,17 +84,34 @@ namespace Ex03.GarageLogic
         /// need to fix to string engine and wheels
         public override string ToString()
         {
-            WheelsListToString = "";
+            string wheelsListToString = "";
             for (int i = 0; i < this.Wheels.Count; i++)
             {
-                WheelsListToString += whell(i+1) + (this.Wheels[i].ToString() + "\n");
+                wheelsListToString += "Wheel " + (i + 1).ToString() + ": " + this.m_WheelsList[i].ToString() + "\n";
             }
-            return string.Format("ModelName: {0}\nLicenseNumber: { 1}\n{2}\n{3}\nCurrentStatus: {4}", this.m_ModelName, this.m_LicenseNumber, this.Engine.ToString, WheelsListToString, this.m_CurrentStatus);
+
+            return string.Format("ModelName: {0}\nLicenseNumber: {1}\n{2}\n{3}\nCurrentStatus: {4}", this.m_ModelName, this.m_LicenseNumber, this.Engine.ToString(), wheelsListToString, this.m_CurrentStatus);
         }
 
-        public override bool Equals(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
+        public override bool Equals(object obj)
         {
-            return i_obj1.m_LicenseNumber == i_Vehicle2.m_LicenseNumber;
+            if (obj is Vehicle vehicle)
+            {
+                return this.m_LicenseNumber == vehicle.m_LicenseNumber;
+            }
+            return false;
         }
+
+
+        public static bool AreEqual(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
+        {
+            return i_Vehicle1.m_LicenseNumber == i_Vehicle2.m_LicenseNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            return m_LicenseNumber?.GetHashCode() ?? 0;
+        }
+
     }
 }

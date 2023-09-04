@@ -15,8 +15,9 @@ namespace Ex03.GarageLogic
         public Garage() 
         {
             m_CustomerCards = new List<CustomerCard>();
+            m_CustomerCards = new List<CustomerCard>();
         }
-
+        //need to imlement 3 cases and split garage to 2 classes ofice and sadna
         public string AddNewVehiclForGarageCare(string i_LicenceNumber)
         {
             foreach (CustomerCard CustomerCard in this.m_CustomerCards)
@@ -25,8 +26,8 @@ namespace Ex03.GarageLogic
                 {
                     if (CustomerCard.VehicleList[i].LicenseNumber  == i_LicenceNumber)
                     {
-                        CustomerCard.VehicleList[i].CurrentStatus = NotFixedYet;
-                        return "The vehicle has been entered successfully"
+                        CustomerCard.VehicleList[i].CurrentStatus = VehicleStatus.NotFixedYet;
+                        return "The vehicle has been entered successfully";
                             
                     }
                 }
@@ -45,7 +46,7 @@ namespace Ex03.GarageLogic
                 {
                     if(CustomerVehicle.CurrentStatus == CurrentStatus)
                     {
-                        LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)
+                        LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + "\n")
                     }
                 }
             }
@@ -68,7 +69,7 @@ namespace Ex03.GarageLogic
             }
             return LicenceNumberOfVehiclesInGarage;
         }
-
+        ///need to correct the syntax 
         public void PumpToMaximumAir(string i_LicenceNumber)
         {
             if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
@@ -84,50 +85,61 @@ namespace Ex03.GarageLogic
                 }
             }
         }
-
+        ///need to correct the syntax 
         public void AddFuel(string i_LicenceNumber, string i_FuelType, string i_FuelToAdd)
         {
             if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
             {
-                throw new ArgumentException("Sorry, We cant add fuel. There is no vehicle in the garage under this lisence: {0}"
-                    , i_LicenceNumber);
+                throw new ArgumentException($"Sorry, We can't add fuel. There is no vehicle in the garage with the license number: {i_LicenceNumber}");
             }
             else
             {
                 if (m_VehicleInGarage[i_LicenceNumber] is ElectricEngine)
                 {
-                    throw new FormatException("Sorry, We cant add fuel to your electric car under this lisence: {0}"
-                        , i_LicenceNumber);
+                    throw new ArgumentException($"Sorry, We can't add fuel to your electric car with license number: {i_LicenceNumber}");
                 }
                 else
                 {
-                    m_VehicleInGarage[i_LicenceNumber].FuelEngine.AddFuel(float.Parse(i_FuelToAdd), i_FuelType);
-
+                    try
+                    {
+                        float fuelToAdd = float.Parse(i_FuelToAdd);
+                        m_VehicleInGarage[i_LicenceNumber].FuelEngine.AddFuel(fuelToAdd, i_FuelType);
+                    }
+                    catch (FormatException)
+                    {
+                        throw new ArgumentException($"Invalid fuel amount provided: {i_FuelToAdd}");
+                    }
                 }
             }
         }
 
+        ///need to correct the syntax 
         public void ChargeEngine(string i_LicenceNumber, string i_HoursToCharge)
         {
             if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
             {
-                throw new ArgumentException("Sorry, We cant add fuel. There is no vehicle under this lisence in the garage: {0}"
-                    , i_LicenceNumber);
+                throw new ArgumentException($"Sorry, there is no vehicle in the garage with the license number: {i_LicenceNumber}");
+            }
+
+            if (m_VehicleInGarage[i_LicenceNumber] is ElectricEngine)
+            {
+                try
+                {
+                    float hoursToCharge = float.Parse(i_HoursToCharge);
+                    m_VehicleInGarage[i_LicenceNumber].ElectricEngine.ChargeEngine(hoursToCharge);
+                }
+                catch (FormatException)
+                {
+                    throw new ArgumentException($"Invalid value for hours to charge: {i_HoursToCharge}");
+                }
             }
             else
             {
-                if (m_VehicleInGarage[i_LicenceNumber] is ElectricEngine)
-                {
-                    m_VehicleInGarage[i_LicenceNumber].ElectricEngine.ChargeEngine(int.Parse(i_HoursToCharge)); //maybe use 'as'?
-                }
-                else
-                {
-                    throw new FormatException("Sorry, We cant charge the engine of your unelectrical car under this lisence: {0}"
-                        , i_LicenceNumber);
-                }
+                throw new ArgumentException($"Sorry, the vehicle with license number: {i_LicenceNumber} is not electric and cannot be charged.");
             }
         }
 
+        ///need to correct the syntax 
         public string VehiclesInformation(string i_LicenceNumber)
         {
             if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))

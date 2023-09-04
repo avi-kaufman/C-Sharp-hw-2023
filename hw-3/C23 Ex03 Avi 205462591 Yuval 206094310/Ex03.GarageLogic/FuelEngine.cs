@@ -8,6 +8,14 @@ namespace Ex03.GarageLogic
 {
     internal class FuelEngine : Engine
     {
+        public enum eFuelType
+        {
+            Soler,
+            Octan95,
+            Octan96,
+            Octan98
+        }
+
         private eFuelType m_FuelType;
 
         public FuelEngine(float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType)
@@ -20,12 +28,10 @@ namespace Ex03.GarageLogic
             m_FuelType = i_FuelType;
         }
 
-        public enum eFuelType
+         public string m_FuelType
         {
-            Soler,
-            Octan95,
-            Octan96,
-            Octan98
+            get { return m_FuelType.ToString(); }
+            set { m_FuelType = value;}  
         }
 
         public void AddFuel(float i_FuelToAdd, string i_FuelType)
