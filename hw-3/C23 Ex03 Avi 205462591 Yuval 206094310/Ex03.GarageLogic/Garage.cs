@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace Ex03.GarageLogic
 {
 
@@ -13,7 +14,7 @@ namespace Ex03.GarageLogic
 
         public Garage() 
         {
-            m_CustomerCards = new List<CustomerCard>;
+            m_CustomerCards = new List<CustomerCard>();
         }
 
         public string AddNewVehiclForGarageCare(string i_LicenceNumber)
@@ -42,7 +43,27 @@ namespace Ex03.GarageLogic
             {
                 foreach(Vehicle CustomerVehicle in CustomerCard.VehicleList)
                 {
-                    LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)
+                    if(CustomerVehicle.CurrentStatus == CurrentStatus)
+                    {
+                        LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)
+                    }
+                }
+            }
+            return LicenceNumberOfVehiclesInGarage;
+        }
+
+        public string LicenceNumberOfVehiclesInGarage()
+        {
+            string LicenceNumberOfVehiclesInGarage = "";
+
+            foreach (CustomerCard CustomerCard in this.m_CustomerCards)
+            {
+                foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
+                {
+                    
+                    
+                        LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)
+                   
                 }
             }
             return LicenceNumberOfVehiclesInGarage;
@@ -75,7 +96,7 @@ namespace Ex03.GarageLogic
             {
                 if (m_VehicleInGarage[i_LicenceNumber] is ElectricEngine)
                 {
-                    throw new ArgumentException("Sorry, We cant add fuel to your electric car under this lisence: {0}"
+                    throw new FormatException("Sorry, We cant add fuel to your electric car under this lisence: {0}"
                         , i_LicenceNumber);
                 }
                 else
@@ -101,7 +122,7 @@ namespace Ex03.GarageLogic
                 }
                 else
                 {
-                    throw new ArgumentException("Sorry, We cant charge the engine of your unelectrical car under this lisence: {0}"
+                    throw new FormatException("Sorry, We cant charge the engine of your unelectrical car under this lisence: {0}"
                         , i_LicenceNumber);
                 }
             }
