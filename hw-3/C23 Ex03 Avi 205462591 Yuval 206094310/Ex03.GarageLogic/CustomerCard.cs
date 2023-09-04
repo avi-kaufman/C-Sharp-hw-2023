@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
             this.m_OwnerName = i_OwnerName;
             this.m_OwnerPhone = i_OwnerPhone;
             this.m_VehicleList = new List<Vehicle>(1);
-            this.m_VehicleList.Add(i_Vehicle);
+            this.m_VehicleList.Add(i_NewVehicle);
         }
 
         public string OwnerName
@@ -41,11 +41,12 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string VehicleListToString = "";
-            foreach (int i = 0; i < this.m_VehicleList.Count; int++)
+            for (int i = 0; i < this.m_VehicleList.Count; i++)
             {
-                VehicleListToString += "Vehicle " i + ": " + m_VehicleList[i].ToString() + "\n";
+                VehicleListToString += "Vehicle " + (i + 1).ToString() + ": " + m_VehicleList[i].ToString() + "\n";
             }
-            return string.Format("Owner Name: {0}\nOwner Phone: {1}\nOwner Vehicles: {3}", this.m_OwnerName, this.m_OwnerPhone, VehicleListToString);
+
+            return string.Format("Owner Name: {0}\nOwner Phone: {1}\nOwner Vehicles: {2}", this.m_OwnerName, this.m_OwnerPhone, VehicleListToString);
         }
     }
 

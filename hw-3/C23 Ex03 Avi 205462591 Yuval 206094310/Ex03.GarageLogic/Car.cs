@@ -36,17 +36,33 @@ namespace Ex03.GarageLogic
             this.m_NumOfDoors = i_NumOfDoors;
         }
 
-        public eCarColor Color
+        public eColorOfCar ColorOfCar
         {
-            get { return m_CarColor; }
-            set { m_CarColor = value; }
+            get { return m_ColorOfCar; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(eColorOfCar), value))
+                {
+                    throw new ArgumentException("Invalid car color provided.");
+                }
+                m_ColorOfCar = value;
+            }
         }
 
-        public eNumOfDoors NumOfDoors
+
+        public int NumberOfDoors
         {
-            get { return m_NumOfDoors; }
-            set { m_NumOfDoors = value; }
+            get { return m_NumberOfDoors; }
+            set
+            {
+                if (value < 2 || value > 5)
+                {
+                    throw new ValueOutOfRangeException("Number of doors", 2, 5);
+                }
+                m_NumberOfDoors = value;
+            }
         }
+
         ///need to fis to string enum.ToString
         public override string ToString()
         {

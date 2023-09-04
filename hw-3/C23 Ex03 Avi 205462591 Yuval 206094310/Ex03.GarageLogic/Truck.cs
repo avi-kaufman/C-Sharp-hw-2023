@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string RefrigeratedTruckToString = m_RefrigeratedTruck ? "Support" : "Dosn't support";
-            return string.Format("{0}\nRefrigeratedTruck: {1}\nCargoVolume: {2}", this.base.ToString(), RefrigeratedTruckToString, this.m_CargoVolume);
+            return string.Format("{0}\nRefrigeratedTruck: {1}\nCargoVolume: {2}", base.ToString(), RefrigeratedTruckToString, this.m_CargoVolume);
         }
     }
 }

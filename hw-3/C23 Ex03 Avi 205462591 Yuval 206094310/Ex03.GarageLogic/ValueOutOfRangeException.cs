@@ -10,14 +10,15 @@ namespace Ex03.GarageLogic
         private float m_MaxValue;
         private float m_MinValue;
 
-        //public float MaxValue
-        //{
-        //	get { return m_MaxValue; }
-        //}
-        //public float MinValue
-        //{
-        //	get { return m_MinValue; }
-        //}
+        public float MaxValue
+        {
+            get { return m_MaxValue; }
+        }
+        public float MinValue
+        {
+            get { return m_MinValue; }
+        }
+
 
         public ValueOutOfRangeException(string i_Parameter, float i_MinValue, float i_MaxValue)
             : base(String.Format("Error. The allowed values of {0} are between {1} to {2}.", i_Parameter, i_MinValue, i_MaxValue))
