@@ -17,18 +17,25 @@ namespace Ex03.GarageLogic
             this.m_OwnerName = i_OwnerName;
             this.m_OwnerPhone = i_OwnerPhone;
             this.m_VehicleList = new List<Vehicle>(1);
-            AddVehicleToCustomerCard(i_NewVehicle);
+            this.m_VehicleList.Add(i_Vehicle);
         }
 
-
-        //Add Vehicle method!
-
-
-
-        ///need to do it in polimorfizem for car motorcycle etc...
-        public void AddVehicleToCustomerCard(Vehicle i_Vehicle)
+        public string OwnerName
         {
-            this.m_VehicleList.Add(i_Vehicle);
+            get { return m_OwnerName; } 
+            set { m_OwnerName = value; }
+        }
+
+        public string OwnerPhone
+        {
+            get { return this.m_OwnerPhone; }
+            set { m_OwnerPhone = value; }
+        }
+
+        public List<Vehicle> VehicleList
+        {
+            get { return m_VehicleList; }
+            set { m_VehicleList = value; }
         }
 
         public override string ToString()

@@ -9,7 +9,44 @@ namespace Ex03.GarageLogic
     //need to fix FormatException
     public class Garage
     {
-        Dictionary<string, Vehicle> m_VehicleInGarage = new Dictionary<string, Vehicle>();
+        private List<CustomerCard> m_CustomerCards;
+
+        public Garage() 
+        {
+            m_CustomerCards = new List<CustomerCard>;
+        }
+
+        public string AddNewVehiclForGarageCare(string i_LicenceNumber)
+        {
+            foreach (CustomerCard CustomerCard in this.m_CustomerCards)
+            {
+                for(int i = 0; i < CustomerCard.VehicleList.Count; i++)
+                {
+                    if (CustomerCard.VehicleList[i].LicenseNumber  == i_LicenceNumber)
+                    {
+                        CustomerCard.VehicleList[i].CurrentStatus = NotFixedYet;
+                        return "The vehicle has been entered successfully"
+                            
+                    }
+                }
+            }
+            // how to take the params for new car from user?
+            this.m_CustomerCards.Add(new CustomerCard(i_OwnerName, i_OwnerPhone, i_NewVehicle));
+        }
+
+        public string LicenceNumberOfVehiclesInGarage(eCurrentCarStatus CurrentStatus)
+        {
+            string LicenceNumberOfVehiclesInGarage = "";
+
+            foreach (CustomerCard CustomerCard in this.m_CustomerCards)
+            {
+                foreach(Vehicle CustomerVehicle in CustomerCard.VehicleList)
+                {
+                    LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)
+                }
+            }
+            return LicenceNumberOfVehiclesInGarage;
+        }
 
         public void PumpToMaximumAir(string i_LicenceNumber)
         {

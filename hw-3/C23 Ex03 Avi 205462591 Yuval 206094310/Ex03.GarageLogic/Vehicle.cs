@@ -87,7 +87,7 @@ namespace Ex03.GarageLogic
             WheelsListToString = "";
             for (int i = 0; i < this.Wheels.Count; i++)
             {
-                WheelsListToString += whell(i+1) + this.Wheels[i].ToString()\n;
+                WheelsListToString += whell(i+1) + (this.Wheels[i].ToString() + "\n");
             }
             return string.Format("ModelName: {0}\nLicenseNumber: { 1}\n{2}\n{3}\nCurrentStatus: {4}", this.m_ModelName, this.m_LicenseNumber, this.Engine.ToString, WheelsListToString, this.m_CurrentStatus);
         }

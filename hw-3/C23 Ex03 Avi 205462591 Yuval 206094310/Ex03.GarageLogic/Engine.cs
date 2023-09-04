@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    abstract class Engine
+    internal abstract class Engine
     {
         private float m_CurrentEnergy;
         private float m_EngineCapcity;
