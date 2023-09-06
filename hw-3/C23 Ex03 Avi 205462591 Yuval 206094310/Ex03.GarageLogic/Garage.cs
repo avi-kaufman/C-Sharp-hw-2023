@@ -4,6 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+///To-do-List:
+/// Fix the old code to m_CustomerCards in all functions 
+/// Implement AddVhicle
+/// check EXCEPTIONs 
+
+
+
+
+
 namespace Ex03.GarageLogic
 {
 
@@ -15,10 +24,9 @@ namespace Ex03.GarageLogic
         public Garage() 
         {
             m_CustomerCards = new List<CustomerCard>();
-            m_CustomerCards = new List<CustomerCard>();
         }
         //need to imlement 3 cases and split garage to 2 classes ofice and sadna
-        public string AddNewVehiclForGarageCare(string i_LicenceNumber)
+        public string AddNewVehiclForGarageCare(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhone, Vehicle i_NewVehicle)
         {
             foreach (CustomerCard CustomerCard in this.m_CustomerCards)
             {
@@ -26,9 +34,8 @@ namespace Ex03.GarageLogic
                 {
                     if (CustomerCard.VehicleList[i].LicenseNumber  == i_LicenceNumber)
                     {
-                        CustomerCard.VehicleList[i].CurrentStatus = VehicleStatus.NotFixedYet;
-                        return "The vehicle has been entered successfully";
-                            
+                        CustomerCard.VehicleList[i].CurrentStatus = Vehicle.eCurrentVehicleStatus.NotFixedYet;
+                        return string.Format("There is already a vehicle in the garage under this lisence: {0}, and it's not fixed yet", i_LicenceNumber);                
                     }
                 }
             }
@@ -61,34 +68,68 @@ namespace Ex03.GarageLogic
             {
                 foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
                 {
-                    
-                    
-                        LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)
-                   
+                    LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)  
                 }
             }
             return LicenceNumberOfVehiclesInGarage;
         }
-        ///need to correct the syntax 
+
+        public void ChangeStateOfVehicle(string i_LicenceNumber, string i_NewState)
+        {
+            bool flag = false;
+            try
+            {
+                foreach (CustomerCard CustomerCard in this.m_CustomerCards)
+                {
+                    foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
+                    {
+                        if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
+                        {
+                            CustomerVehicle.CurrentStatus = i_NewState;
+                            flag = true;
+                        }
+                    }
+                }
+                if (!flag)
+                {
+                    throw new ArgumentException($"Sorry. There is no vehicle in the garage under this lisence: {i_LicenceNumber}");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new FormatException("The input is not a valid vehicle State");
+            }
+        }
+
         public void PumpToMaximumAir(string i_LicenceNumber)
         {
-            if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
+            if (!IsVehicleInGarage(i_LicenceNumber))
             {
-                throw new ArgumentException("Sorry, We cant pump air. There is no vehicle in the garage under this lisence: {0}"
-                    , i_LicenceNumber);
+                throw new ArgumentException($"Sorry, We cant pump air. There is no vehicle in the garage under this lisence: {i_LicenceNumber}");
             }
             else
             {
-                foreach (Wheels wheel in m_VehicleInGarage[i_LicenceNumber].Wheels)
+                foreach (CustomerCard CustomerCard in this.m_CustomerCards)
                 {
-                    wheel.PumpToMax();
+                    foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
+                    {
+                        if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
+                        {
+                            foreach (Wheels wheel in CustomerVehicle.Wheels)
+                            {
+                                wheel.PumpToMax();
+                            }
+                        }
+                    }
                 }
             }
         }
-        ///need to correct the syntax 
+
+
+        ///need to correct the code to m_CustomerCards format  
         public void AddFuel(string i_LicenceNumber, string i_FuelType, string i_FuelToAdd)
         {
-            if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
+            if (!IsVehicleInGarage(i_LicenceNumber))
             {
                 throw new ArgumentException($"Sorry, We can't add fuel. There is no vehicle in the garage with the license number: {i_LicenceNumber}");
             }
@@ -113,25 +154,32 @@ namespace Ex03.GarageLogic
             }
         }
 
-        ///need to correct the syntax 
+        ///need to correct the code to m_CustomerCards format  
         public void ChargeEngine(string i_LicenceNumber, string i_HoursToCharge)
         {
-            if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
+            if (!IsVehicleInGarage(i_LicenceNumber))
             {
                 throw new ArgumentException($"Sorry, there is no vehicle in the garage with the license number: {i_LicenceNumber}");
             }
 
-            if (m_VehicleInGarage[i_LicenceNumber] is ElectricEngine)
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
-                try
+                foreach (Vehicle vehicle in customerCard.VehicleList)
                 {
-                    float hoursToCharge = float.Parse(i_HoursToCharge);
-                    m_VehicleInGarage[i_LicenceNumber].ElectricEngine.ChargeEngine(hoursToCharge);
+                    if (vehicle.Engine is ElectricEngine)
+                    {
+                        try
+                        {
+                            float hoursToCharge = float.Parse(i_HoursToCharge);
+                            m_VehicleInGarage[i_LicenceNumber].ElectricEngine.ChargeEngine(hoursToCharge);
+                        }
+                        catch (FormatException)
+                        {
+                            throw new ArgumentException($"Invalid value for hours to charge: {i_HoursToCharge}");
+                        }
+                    }
                 }
-                catch (FormatException)
-                {
-                    throw new ArgumentException($"Invalid value for hours to charge: {i_HoursToCharge}");
-                }
+
             }
             else
             {
@@ -139,18 +187,41 @@ namespace Ex03.GarageLogic
             }
         }
 
-        ///need to correct the syntax 
         public string VehiclesInformation(string i_LicenceNumber)
         {
-            if (!m_VehicleInGarage.ContainsKey(i_LicenceNumber))
+            if (!IsVehicleInGarage(i_LicenceNumber))
             {
-                throw new ArgumentException("Sorry, there is no car in the garage under this lisence : {0}"
-                    , i_LicenceNumber);
+                throw new ArgumentException($"Sorry, there is no car in the garage under this lisence : {i_LicenceNumber}";
             }
             else
             {
-                return [i_LicenceNumber].CustomerCard.ToString(); // need to find the car 
+                foreach(CustomerCard customerCard in this.m_CustomerCards)
+                {
+                    foreach(Vehicle vehicle in customerCard.VehicleList)
+                    {
+                        if(vehicle.LicenseNumber == i_LicenceNumber)
+                        {
+                            return vehicle.ToString();
+                        }
+                    }
+                }
             }
+        }
+
+        private bool IsVehicleInGarage(string licenseNumber)
+        {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                foreach (Vehicle vehicle in customerCard.VehicleList)
+                {
+                    foreach()
+                    if (vehicle.LicenseNumber == licenseNumber)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
