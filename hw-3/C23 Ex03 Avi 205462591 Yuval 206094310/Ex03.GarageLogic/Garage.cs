@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,17 +26,129 @@ namespace Ex03.GarageLogic
             m_CustomerCards = new List<CustomerCard>();
         }
         //need to imlement 3 cases and split garage to 2 classes ofice and sadna
-        public string AddNewVehiclForGarageCare(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhone, Vehicle i_NewVehicle)
+        //  מקרה ראשון הלקוח קיים במערכת והרכב מטופל כעת במוסךV
+        //מקרה שני הלקוח קיים במערכת הרכב גם קיים במערכת במצב תוקן, צריך להעביר למצב תיקוןV
+        // מקרה שלישי הלקוח קיים במערכת עם רכבים אחרים ואין את הרכב הנוכחי במערכת
+        // מקרה רביעי הלקוח אינו במערכת וצריך לפתוח כרטיס חבר חדש ולהכניס אליו את הרכב
+        //מקרה חמישי הרכב קיים במערכת ויושב על כרטיס לקוח של בן אדם אחר  
+
+        public string AddVehicle(string i_LicenseNumber, string i_CustomerName)
         {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                foreach (Vehicle vehicle in customerCard.VehicleList)
+                {
+                    if (vehicle.LicenseNumber == i_LicenseNumber)
+                    {
+                        if (customerCard.OwnerName == i_CustomerName)
+                        {
+                            if (vehicle.CurrentStatus == eCurrentCarStatus.NotFixedYet)
+                            {
+                                return "The vehicle is in the garage and it is currently in line to be fixed.";
+                            }
+                            else
+                            {
+                                vehicle.CurrentStatus = eCurrentCarStatus.NotFixedYet;
+                                return "The vehicle has been added to the line of vehicles to be fixed.";
+                            }
+                        }
+                        else
+                        {
+                            return "This vehicle is associated with another customer.";
+                        }
+                    }
+                }
+
+                // This vehicle isn't in this customer's list, but the customer exists (Scenario 3)
+                if (customerCard.OwnerName == i_CustomerName)
+                {
+                    // You would need to add logic here to add the vehicle to this customer's list.
+                    // Since it doesn't communicate directly, you should return an appropriate message.
+                    return "The customer exists but the vehicle isn't in the system. Please provide the relevant vehicle details.";
+                }
+            }
+
+            // Scenario 4: Neither the customer nor the vehicle exists.
+            return "The customer and vehicle aren't in the garage. Please provide all the relevant details.";
+        }
+
+        public string AddCustomerToCustomerCards(string i_OwnerName, string i_OwnerPhone)
+        {
+            this.m_CustomerCards.Add(new CustomerCard(string i_OwnerName, string i_OwnerPhone))
+            return "Added new Customer sucssesfuly."
+        }
+        //electric car
+        public string AddNewVehicleToCustomerCard(string i_CustomerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
+        {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                if(customerCard.OwnerName == i_CustomerName)
+                {
+                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, i_EngineCapcity, i_CarColor, i_NumOfDoors))
+                    return "Added new electric car to customer card sucssesfuly."
+                }
+            }
+        }
+        //fule car
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
+        {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                if (customerCard.OwnerName == i_CustomerName)
+                {
+                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, i_EngineCapcity, i_FuelType, i_CarColor, i_NumOfDoors))
+                    return "Added new fule car to customer card sucssesfuly."
+                }
+            }
+        }
+
+        //electric motorcycle
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity,
+            eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
+        {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                if (customerCard.OwnerName == i_CustomerName)
+                {
+                }
+            } }
+
+
+        AddVehicle(string i_LicenseNumber, string i_CustomerName, details for fule motor)
+        AddVehicle(string i_LicenseNumber, string i_CustomerName, details for electric motor)
+        AddVehicle(string i_LicenseNumber, string i_CustomerName, details for fule trauck)
+
+
+
+
+
+
+
+
+
+
+        public string AddVehicl(string i_OwnerName, string i_OwnerPhone, string i_LicenceNumber)
+        {   
             foreach (CustomerCard CustomerCard in this.m_CustomerCards)
             {
                 for(int i = 0; i < CustomerCard.VehicleList.Count; i++)
                 {
                     if (CustomerCard.VehicleList[i].LicenseNumber  == i_LicenceNumber)
                     {
-                        CustomerCard.VehicleList[i].CurrentStatus = Vehicle.eCurrentVehicleStatus.NotFixedYet;
-                        return string.Format("There is already a vehicle in the garage under this lisence: {0}, and it's not fixed yet", i_LicenceNumber);                
+                        if(CustomerCard.VehicleList[i].CurrentStatus == Vehicle.eCurrentVehicleStatus.NotFixedYet) 
+                        {
+                            return string.Format("There is already a vehicle in the garage under this lisence: {0}, and it's not fixed yet", i_LicenceNumber);
+
+                        }
+                        else
+                        {
+                            CustomerCard.VehicleList[i].CurrentStatus = Vehicle.eCurrentVehicleStatus.NotFixedYet;
+                            return string.Format("Vehicle isence: {0} added sucsesfuly.", i_LicenceNumber);
+
+                        }
+                        break;
                     }
+                    
                 }
             }
             // how to take the params for new car from user?
@@ -129,7 +241,7 @@ namespace Ex03.GarageLogic
         ///need to correct the code to m_CustomerCards format  
         public void AddFuel(string i_LicenceNumber, string i_FuelType, string i_FuelToAdd)
         {
-            if (!IsVehicleInGarage(i_LicenceNumber))
+            if (!this.IsVehicleInGarage(i_LicenceNumber))
             {
                 throw new ArgumentException($"Sorry, We can't add fuel. There is no vehicle in the garage with the license number: {i_LicenceNumber}");
             }
@@ -214,10 +326,10 @@ namespace Ex03.GarageLogic
             {
                 foreach (Vehicle vehicle in customerCard.VehicleList)
                 {
-                    foreach()
                     if (vehicle.LicenseNumber == licenseNumber)
                     {
                         return true;
+                        break;
                     }
                 }
             }

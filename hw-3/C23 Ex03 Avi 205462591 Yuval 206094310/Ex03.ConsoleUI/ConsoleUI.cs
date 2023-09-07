@@ -18,7 +18,7 @@ namespace Ex03.ConsoleUI
             while (flag)
             {   
                 System.Console.WriteLine(@"Welcome to the garage! What would you like to do?:
-             //  1 - Add a vehicle to the garage
+                 1 - Add a vehicle to the garage
                  2 - Present the vehicles in the garage
                  3 - Change a vehicle's status
                  4 - Inflate maximum air in the wheels 
@@ -70,6 +70,95 @@ namespace Ex03.ConsoleUI
 
         public static void AddVehicleUI()
         {
+            bool flag = true;
+            bool isExistInGarage = false;
+            while (flag)
+            {
+                System.Console.WriteLine("Please enter a vehicle licence number");
+                string licenceNumber = Console.ReadLine();
+                System.Console.WriteLine("Please enter your name");
+                string customerName = Console.ReadLine();
+                isExistInGarage = Garage.AddVehicle(licenceNumber);
+                if (!isExistInGarage)
+                {
+                    System.Console.WriteLine(@"What is the type of your vehicle? :
+                        1 - Car
+                        2 - Electric Car
+                        3 - Motorcycle
+                        4 - Electric Motorcycle 
+                        5 - Trunk");
+                }
+
+                string userChoice = Console.ReadLine();
+                int intCoice = 0;
+
+                while (!int.TryParse(userChoice, out intCoice) || intCoice < 1 || intCoice > 5)
+                {
+                    Console.WriteLine("Invalid input, please try again");
+                    userChoice = Console.ReadLine();
+                }
+
+                switch (userChoice)
+                {
+                    case 1:
+                        System.Console.WriteLine("Please enter the car model");
+                        string carModel = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the amount of fuel in the car");
+                        string carCurrentEnergy = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the color of your car");
+                        string carColor = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the number of doors of your car");
+                        string carNumberOfDoors = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the fuel type of your car");
+                        string carFuelType = Console.ReadLine();
+                        Garage.AddVehicle(customerName, carModel, licenceNumber, carCurrentEnergy, carFuelType, carColor, carNumberOfDoors);
+                        break;
+                    case 2:
+                        System.Console.WriteLine("Please enter the car model");
+                        string carModel = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the amount of energy in the car");
+                        string carCurrentEnergy = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the color of your car");
+                        string carColor = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the number of doors of your car");
+                        string carNumberOfDoors = Console.ReadLine();
+                        Garage.AddVehicle(customerName, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
+                        break;
+                    case 3:
+                        System.Console.WriteLine("Please enter the motorcycle model");
+                        string motorcycleModel = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the amount of fuel in the motorcycle");
+                        string motorcycleCurrentEnergy = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the type of your motorcycle licence");
+                        string typeOfLicence = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the fuel type of your motorcycle");
+                        string motorcyclFuelType = Console.ReadLine();
+                        Garage.AddVehicle(customerName, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence);
+                        break;
+                    case 4:
+                        System.Console.WriteLine("Please enter the motorcycle model");
+                        string motorcycleModel = Console.ReadLine();
+                        System.Console.WriteLine("Please enter how much hours of energy left in your motorcycle");
+                        string motorcycleCurrentEnergy = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the type of your motorcycle licence");
+                        string typeOfLicence = Console.ReadLine();
+                        Garage.AddVehicle(customerName, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence);
+                        break;
+                    case 5:
+                        System.Console.WriteLine("Please enter the trunk model");
+                        string truckModel = Console.ReadLine();
+                        System.Console.WriteLine("Please enter how much hours of energy left in your motorcycle");
+                        string truckCurrentEnergy = Console.ReadLine();
+                        System.Console.WriteLine("Please enter the fuel type of your truck");
+                        string trucklFuelType = Console.ReadLine();
+                        System.Console.WriteLine("Is it a refrigerated truck? <Y/N>");
+                        string isRefrigerated = Console.ReadLine();
+                        System.Console.WriteLine("What is the cargo volume?");
+                        string truckCargoVolume = Console.ReadLine();
+                        Garage.AddVehicle(customerName, truckModel, licenceNumber, truckCurrentEnergy, trucklFuelType, isRefrigerated, truckCargoVolume);
+                        break;
+                }
+            }
         }
 
         public static void LicenceNumberOfVehiclesInGarageUI()
