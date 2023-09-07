@@ -32,55 +32,38 @@ namespace Ex03.GarageLogic
         // מקרה רביעי הלקוח אינו במערכת וצריך לפתוח כרטיס חבר חדש ולהכניס אליו את הרכב
         //מקרה חמישי הרכב קיים במערכת ויושב על כרטיס לקוח של בן אדם אחר  
 
-        public string AddVehicle(string i_LicenseNumber, string i_CustomerName)
+        public bool AddVehicle(string i_LicenseNumber)
         {
+            if (!IsVehicleInGarage(i_LicenseNumber)
+            { 
+                return false;
+            }
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 foreach (Vehicle vehicle in customerCard.VehicleList)
                 {
                     if (vehicle.LicenseNumber == i_LicenseNumber)
                     {
-                        if (customerCard.OwnerName == i_CustomerName)
-                        {
-                            if (vehicle.CurrentStatus == eCurrentCarStatus.NotFixedYet)
-                            {
-                                return "The vehicle is in the garage and it is currently in line to be fixed.";
-                            }
-                            else
-                            {
-                                vehicle.CurrentStatus = eCurrentCarStatus.NotFixedYet;
-                                return "The vehicle has been added to the line of vehicles to be fixed.";
-                            }
-                        }
-                        else
-                        {
-                            return "This vehicle is associated with another customer.";
-                        }
+                        vehicle.CurrentStatus = eCurrentCarStatus.NotFixedYet;  
+                        return true;
                     }
                 }
-
-                // This vehicle isn't in this customer's list, but the customer exists (Scenario 3)
-                if (customerCard.OwnerName == i_CustomerName)
-                {
-                    // You would need to add logic here to add the vehicle to this customer's list.
-                    // Since it doesn't communicate directly, you should return an appropriate message.
-                    return "The customer exists but the vehicle isn't in the system. Please provide the relevant vehicle details.";
-                }
             }
-
-            // Scenario 4: Neither the customer nor the vehicle exists.
-            return "The customer and vehicle aren't in the garage. Please provide all the relevant details.";
         }
 
-        public string AddCustomerToCustomerCards(string i_OwnerName, string i_OwnerPhone)
+        public void AddCustomer(string i_OwnerName, string i_OwnerPhone)
         {
             this.m_CustomerCards.Add(new CustomerCard(string i_OwnerName, string i_OwnerPhone))
-            return "Added new Customer sucssesfuly."
+          
         }
 
         //electric car
-        public string AddNewVehicleToCustomerCard(string i_CustomerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
+        public string AddVehicle(string i_CustomerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
         {
+            if (!IsCustomerExist(i_costomerName))
+            {
+                AddCustomer(i_OwnerName, i_OwnerPhone)
+            }
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if(customerCard.OwnerName == i_CustomerName)
@@ -91,8 +74,12 @@ namespace Ex03.GarageLogic
             }
         }
         //fule car
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
+        public string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
         {
+            if (!IsCustomerExist(i_costomerName))
+            {
+                AddCustomer(i_OwnerName, i_OwnerPhone)
+            }
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
@@ -104,9 +91,13 @@ namespace Ex03.GarageLogic
         }
 
         //electric motorcycle
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
+        public string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
             eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
         {
+            if (!IsCustomerExist(i_costomerName))
+            {
+                AddCustomer(i_OwnerName, i_OwnerPhone)
+            }
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
@@ -119,9 +110,13 @@ namespace Ex03.GarageLogic
         }
 
         //fule motorcycle
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
+        public string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
             eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
         {
+            if (!IsCustomerExist(i_costomerName))
+            {
+                AddCustomer(i_OwnerName, i_OwnerPhone)
+            }
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
@@ -134,8 +129,12 @@ namespace Ex03.GarageLogic
         }
 
         //fule truck
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, bool i_RefrigeratedTruck, float i_CargoVolume)
+        public string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, bool i_RefrigeratedTruck, float i_CargoVolume)
         {
+            if (!IsCustomerExist(i_costomerName))
+            {
+                AddCustomer(i_OwnerName, i_OwnerPhone)
+            }
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
@@ -146,6 +145,17 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public bool IsCustomerExist(string i_costomerName)
+        {
+            foreach(CustomerCard CustomerCard in this.m_CustomerCards)
+            {
+                if (i_costomerName == CustomerCard.OwnerName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public string LicenceNumberOfVehiclesInGarage(eCurrentCarStatus CurrentStatus)

@@ -67,7 +67,7 @@ namespace Ex03.ConsoleUI
                 }
             }
         }
-
+        ///add owner phone and add it to the functions
         public static void AddVehicleUI()
         {
             bool flag = true;
@@ -78,6 +78,8 @@ namespace Ex03.ConsoleUI
                 string licenceNumber = Console.ReadLine();
                 System.Console.WriteLine("Please enter your name");
                 string customerName = Console.ReadLine();
+                System.Console.WriteLine("Please enter your phone number");
+                string customerPhone = Console.ReadLine();
                 isExistInGarage = Garage.AddVehicle(licenceNumber);
                 if (!isExistInGarage)
                 {
@@ -111,7 +113,7 @@ namespace Ex03.ConsoleUI
                         string carNumberOfDoors = Console.ReadLine();
                         System.Console.WriteLine("Please enter the fuel type of your car");
                         string carFuelType = Console.ReadLine();
-                        Garage.AddVehicle(customerName, carModel, licenceNumber, carCurrentEnergy, carFuelType, carColor, carNumberOfDoors);
+                        Garage.AddVehicle(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carFuelType, carColor, carNumberOfDoors);
                         break;
                     case 2:
                         System.Console.WriteLine("Please enter the car model");
@@ -122,7 +124,7 @@ namespace Ex03.ConsoleUI
                         string carColor = Console.ReadLine();
                         System.Console.WriteLine("Please enter the number of doors of your car");
                         string carNumberOfDoors = Console.ReadLine();
-                        Garage.AddVehicle(customerName, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
+                        Garage.AddVehicle(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
                         break;
                     case 3:
                         System.Console.WriteLine("Please enter the motorcycle model");
@@ -133,7 +135,7 @@ namespace Ex03.ConsoleUI
                         string typeOfLicence = Console.ReadLine();
                         System.Console.WriteLine("Please enter the fuel type of your motorcycle");
                         string motorcyclFuelType = Console.ReadLine();
-                        Garage.AddVehicle(customerName, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence);
+                        Garage.AddVehicle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence);
                         break;
                     case 4:
                         System.Console.WriteLine("Please enter the motorcycle model");
@@ -142,7 +144,7 @@ namespace Ex03.ConsoleUI
                         string motorcycleCurrentEnergy = Console.ReadLine();
                         System.Console.WriteLine("Please enter the type of your motorcycle licence");
                         string typeOfLicence = Console.ReadLine();
-                        Garage.AddVehicle(customerName, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence);
+                        Garage.AddVehicle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence);
                         break;
                     case 5:
                         System.Console.WriteLine("Please enter the trunk model");
@@ -155,7 +157,7 @@ namespace Ex03.ConsoleUI
                         string isRefrigerated = Console.ReadLine();
                         System.Console.WriteLine("What is the cargo volume?");
                         string truckCargoVolume = Console.ReadLine();
-                        Garage.AddVehicle(customerName, truckModel, licenceNumber, truckCurrentEnergy, trucklFuelType, isRefrigerated, truckCargoVolume);
+                        Garage.AddVehicle(customerName, customerPhone, truckModel, licenceNumber, truckCurrentEnergy, trucklFuelType, isRefrigerated, truckCargoVolume);
                         break;
                 }
             }
