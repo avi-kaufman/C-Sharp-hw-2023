@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using static Ex03.GarageLogic.Car;
 using static Ex03.GarageLogic.FuelEngine;
@@ -16,15 +16,13 @@ using static Ex03.GarageLogic.Vehicle;
 
 namespace Ex03.GarageLogic
 {
-
-    //need to fix FormatException
     public class Garage
     {
         private static List<CustomerCard> m_CustomerCards = new List<CustomerCard>();
 
         public Garage()
         {
-           
+
         }
 
 
@@ -56,6 +54,12 @@ namespace Ex03.GarageLogic
         //electric car
         public string AddVehicle(string i_CustomerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, string i_CurrentEnergy, string i_CarColor, string i_NumOfDoors)
         {
+            float currentEnergy = float.Parse(i_CurrentEnergy);
+            int numOfDoors = int.Parse(i_NumOfDoors);
+            if (!(System.Enum.IsDefined(eCarColor, i_CarColor) || currentEnergy < 0 || currentEnergy > 5.2 || numOfDoors < 2 || numOfDoors > 5))
+            {
+                throw new ArgumentException("Invalid input.");
+            }
             if (!IsCustomerExist(i_CustomerName))
             {
                 AddCustomer(i_CustomerName, i_OwnerPhone);
@@ -64,8 +68,8 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_CustomerName)
                 {
-                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 5.2f, i_CarColor, i_NumOfDoors));
-                    
+                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, currentEnergy, 5.2f, Enum.TryParse(carColor), numOfDoors));
+
                 }
             }
             return "Added new electric car to customer card sucssesfuly.";
@@ -73,7 +77,12 @@ namespace Ex03.GarageLogic
         //fule car
         public string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, string i_CurrentEnergy, string i_CarColor, string i_NumOfDoors)
         {
-            
+            float currentEnergy = float.Parse(i_CurrentEnergy);
+            int numOfDoors = int.Parse(i_NumOfDoors);
+            if (!(System.Enum.IsDefined(eCarColor, i_CarColor) || currentEnergy < 0 || currentEnergy > 44 || numOfDoors < 2 || numOfDoors > 5))
+            {
+                throw new ArgumentException("Invalid input.");
+            }
             if (!IsCustomerExist(i_OwnerName))
             {
                 AddCustomer(i_OwnerName, i_OwnerPhone);
@@ -82,23 +91,22 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_OwnerName)
                 {
-                    float CurrentEnergy = float.Parse(i_CurrentEnergy);
-
-                    if (CurrentEnergy < 0 || CurrentEnergy > 44)
-                    {
-                        throw new ValueOutOfRangeException("Energy of fule car",0, 44);
-                    }
-                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, CurrentEnergy, 44, eFuelType.Octan95, i_CarColor, i_NumOfDoors));
-                    
+                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, currentEnergy, 44, eFuelType.Octan95, Enum.TryParse(i_CarColor), numOfDoors));
                 }
             }
             return "Added new fule car to customer card sucssesfuly.";
         }
 
         //electric motorcycle
-        public static string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
-            eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
+        public static string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, string i_CurrentEnergy,
+            string i_LicenseType, string i_EngineCapacityInCubicCentimeter)
         {
+            float currentEnergy = float.Parse(i_CurrentEnergy);
+            int engineCpacity = int.Parse(i_EngineCapacityInCubicCentimeter);
+            if (!(System.Enum.IsDefined(eLicenseType, i_LicenseType) || currentEnergy < 0 || currentEnergy > 2.4 || engineCpacity < 0))
+            {
+                throw new ArgumentException("Invalid input.");
+            }
             if (!IsCustomerExist(i_OwnerName))
             {
                 AddCustomer(i_OwnerName, i_OwnerPhone);
@@ -107,18 +115,28 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_OwnerName)
                 {
-                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 2.4f,
-                    i_LicenseType, i_EngineCapacityInCubicCentimeter));
+                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, currentEnergy, 2.4f,
+                    Enum.TryParse(i_LicenseType), engineCpacity));
                 }
             }
             return "Added new electric motorcycle to customer card sucssesfuly.";
-
         }
 
+
+        //// NEED TO ADD IN UI i_EngineCapacityInCubicCentimeter!
+
+
+
         //fule motorcycle
-        public static string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
-            eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
+        public static string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, string i_CurrentEnergy,string i_MotorcyclFuelType
+            string i_LicenseType, string i_EngineCapacityInCubicCentimeter)
         {
+            float currentEnergy = float.Parse(i_CurrentEnergy);
+            int engineCpacity = int.Parse(i_EngineCapacityInCubicCentimeter);
+            if (!(System.Enum.IsDefined(eLicenseType, i_LicenseType) || !(System.Enum.IsDefined(eFuelType, i_MotorcyclFuelType) || currentEnergy < 0 || currentEnergy > 6.3 || engineCpacity < 0))
+            {
+                throw new ArgumentException("Invalid input.");
+            }
             if (!IsCustomerExist(i_OwnerName))
             {
                 AddCustomer(i_OwnerName, i_OwnerPhone);
@@ -127,17 +145,28 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_OwnerName)
                 {
-                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 6.2f, eFuelType.Octan98,
-                    i_LicenseType, i_EngineCapacityInCubicCentimeter));
+                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, currentEnergy, 6.2f, eFuelType.Octan98,
+                    Enum.TryParse(i_LicenseType), engineCpacity));
                 }
             }
             return "Added new fule motorcycle to customer card sucssesfuly.";
 
         }
 
+        /// REMOVE FUELTYPE FROM THE UI FUNCTION
         //fule truck
-        public static string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, bool i_RefrigeratedTruck, float i_CargoVolume)
+        public static string AddVehicle(string i_OwnerName, string i_OwnerPhone, string i_ModelName, string i_LicenseNumber, string i_CurrentEnergy, string i_RefrigeratedTruck, float i_CargoVolume)
         {
+
+            truckCurrentEnergy, trucklFuelType, isRefrigerated, truckCargoVolume
+
+            float currentEnergy = float.Parse(i_CurrentEnergy);
+            bool refrigeratedTruck = bool.Parse(i_RefrigeratedTruck);
+            int cargoVolume = int.Parse(i_CargoVolume);
+            if (currentEnergy < 0 || currentEnergy > 130 || cargoVolume < 0) || )
+            {
+                throw new ArgumentException("Invalid input.");
+            }
             if (!IsCustomerExist(i_OwnerName))
             {
                 AddCustomer(i_OwnerName, i_OwnerPhone);
@@ -146,7 +175,7 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_OwnerName)
                 {
-                    customerCard.VehicleList.Add(new Truck(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 130, eFuelType.Soler, i_RefrigeratedTruck, i_CargoVolume));
+                    customerCard.VehicleList.Add(new Truck(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 130, eFuelType.Soler, refrigeratedTruck, cargoVolume));
                 }
             }
             return "Added new fule truck to customer card sucssesfuly.";
@@ -161,9 +190,10 @@ namespace Ex03.GarageLogic
                 {
                     return true;
                 }
-            } 
+            }
             return false;
         }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public static string LicenceNumberOfVehiclesInGarage(eCurrentCarStatus CurrentStatus)
@@ -311,7 +341,7 @@ namespace Ex03.GarageLogic
                     }
                 }
             }
-                throw new ArgumentException($"Sorry, the vehicle with license number: {i_LicenceNumber} is not electric and cannot be charged.");
+            throw new ArgumentException($"Sorry, the vehicle with license number: {i_LicenceNumber} is not electric and cannot be charged.");
         }
 
         public static string VehiclesInformation(string i_LicenceNumber)
