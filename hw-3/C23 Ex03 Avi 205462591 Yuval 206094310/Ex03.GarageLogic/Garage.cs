@@ -79,13 +79,13 @@ namespace Ex03.GarageLogic
         }
 
         //electric car
-        public string AddNewVehicleToCustomerCard(string i_CustomerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
+        public string AddNewVehicleToCustomerCard(string i_CustomerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
         {
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if(customerCard.OwnerName == i_CustomerName)
                 {
-                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, i_EngineCapcity, i_CarColor, i_NumOfDoors))
+                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 5.2, i_CarColor, i_NumOfDoors))
                     return "Added new electric car to customer card sucssesfuly."
                 }
             }
@@ -119,14 +119,14 @@ namespace Ex03.GarageLogic
         }
 
         //fule motorcycle
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity,
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
             eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
         {
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
                 {
-                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, i_CurrentEnergy, i_EngineCapcity, Octan98,
+                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 6.2, Octan98,
                     i_LicenseType, i_EngineCapacityInCubicCentimeter))
                     return "Added new fule motorcycle to customer card sucssesfuly."
                 }
@@ -134,19 +134,19 @@ namespace Ex03.GarageLogic
         }
 
         //fule truck
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, bool i_RefrigeratedTruck, float i_CargoVolume)
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, bool i_RefrigeratedTruck, float i_CargoVolume)
         {
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
                 {
-                    customerCard.VehicleList.Add(new Truck(string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, bool i_RefrigeratedTruck, float i_CargoVolume))
+                    customerCard.VehicleList.Add(new Truck(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 130, Soler, i_RefrigeratedTruck, i_CargoVolume))
                     return "Added new fule truck to customer card sucssesfuly."
                 }
             }
         }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public string LicenceNumberOfVehiclesInGarage(eCurrentCarStatus CurrentStatus)
         {
@@ -154,9 +154,9 @@ namespace Ex03.GarageLogic
 
             foreach (CustomerCard CustomerCard in this.m_CustomerCards)
             {
-                foreach(Vehicle CustomerVehicle in CustomerCard.VehicleList)
+                foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
                 {
-                    if(CustomerVehicle.CurrentStatus == CurrentStatus)
+                    if (CustomerVehicle.CurrentStatus == CurrentStatus)
                     {
                         LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + "\n")
                     }
@@ -173,7 +173,7 @@ namespace Ex03.GarageLogic
             {
                 foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
                 {
-                    LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + \n)  
+                    LicenceNumberOfVehiclesInGarage += (CustomerVehicle.LicenseNumber + "\n")
                 }
             }
             return LicenceNumberOfVehiclesInGarage;
@@ -181,7 +181,10 @@ namespace Ex03.GarageLogic
 
         public void ChangeStateOfVehicle(string i_LicenceNumber, string i_NewState)
         {
-            bool flag = false;
+            if (!IsVehicleInGarage(i_LicenceNumber))
+            {
+                throw new ArgumentException($"Sorry. There is no vehicle in the garage under this lisence: {i_LicenceNumber}");
+            }
             try
             {
                 foreach (CustomerCard CustomerCard in this.m_CustomerCards)
@@ -191,16 +194,11 @@ namespace Ex03.GarageLogic
                         if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
                         {
                             CustomerVehicle.CurrentStatus = i_NewState;
-                            flag = true;
                         }
                     }
                 }
-                if (!flag)
-                {
-                    throw new ArgumentException($"Sorry. There is no vehicle in the garage under this lisence: {i_LicenceNumber}");
-                }
             }
-            catch (Exception e)
+            catch (FormatException)
             {
                 throw new FormatException("The input is not a valid vehicle State");
             }
@@ -220,7 +218,7 @@ namespace Ex03.GarageLogic
                     {
                         if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
                         {
-                            foreach (Wheels wheel in CustomerVehicle.Wheels)
+                            foreach (Wheel wheel in CustomerVehicle.Wheels)
                             {
                                 wheel.PumpToMax();
                             }
@@ -231,7 +229,6 @@ namespace Ex03.GarageLogic
         }
 
 
-        ///need to correct the code to m_CustomerCards format  
         public void AddFuel(string i_LicenceNumber, string i_FuelType, string i_FuelToAdd)
         {
             if (!this.IsVehicleInGarage(i_LicenceNumber))
@@ -240,26 +237,34 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                if (m_VehicleInGarage[i_LicenceNumber] is ElectricEngine)
+                foreach (CustomerCard CustomerCard in this.m_CustomerCards)
                 {
-                    throw new ArgumentException($"Sorry, We can't add fuel to your electric car with license number: {i_LicenceNumber}");
-                }
-                else
-                {
-                    try
+                    foreach (Vehicle CustomerVehicle in CustomerCard.VehicleList)
                     {
-                        float fuelToAdd = float.Parse(i_FuelToAdd);
-                        m_VehicleInGarage[i_LicenceNumber].FuelEngine.AddFuel(fuelToAdd, i_FuelType);
-                    }
-                    catch (FormatException)
-                    {
-                        throw new ArgumentException($"Invalid fuel amount provided: {i_FuelToAdd}");
+                        if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
+                        {
+                            if (CustomerVehicle.Engine is ElectricEngine)
+                            {
+                                throw new ArgumentException($"Sorry, We can't add fuel to your electric car with license number: {i_LicenceNumber}");
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    float fuelToAdd = float.Parse(i_FuelToAdd);
+                                    ((FuelEngine)CustomerVehicle.Engine).AddFuel(fuelToAdd, i_FuelType)
+                                }
+                                catch (FormatException)
+                                {
+                                    throw new FormatException($"Invalid fuel amount provided: {i_FuelToAdd}");
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
-        ///need to correct the code to m_CustomerCards format  
         public void ChargeEngine(string i_LicenceNumber, string i_HoursToCharge)
         {
             if (!IsVehicleInGarage(i_LicenceNumber))
@@ -269,22 +274,24 @@ namespace Ex03.GarageLogic
 
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
-                foreach (Vehicle vehicle in customerCard.VehicleList)
+                foreach (Vehicle CustomerVehicle in customerCard.VehicleList)
                 {
-                    if (vehicle.Engine is ElectricEngine)
+                    if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
                     {
-                        try
+                        if (CustomerVehicle.Engine is ElectricEngine)
                         {
-                            float hoursToCharge = float.Parse(i_HoursToCharge);
-                            m_VehicleInGarage[i_LicenceNumber].ElectricEngine.ChargeEngine(hoursToCharge);
-                        }
-                        catch (FormatException)
-                        {
-                            throw new ArgumentException($"Invalid value for hours to charge: {i_HoursToCharge}");
+                            try
+                            {
+                                float hoursToCharge = float.Parse(i_HoursToCharge);
+                                ((ElectricEngine)CustomerVehicle.Engine).ChargeEngine(hoursToCharge);
+                            }
+                            catch (FormatException)
+                            {
+                                throw new FormatException($"Invalid value for hours to charge: {i_HoursToCharge}");
+                            }
                         }
                     }
                 }
-
             }
             else
             {
@@ -300,13 +307,13 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                foreach(CustomerCard customerCard in this.m_CustomerCards)
+                foreach (CustomerCard customerCard in this.m_CustomerCards)
                 {
-                    foreach(Vehicle vehicle in customerCard.VehicleList)
+                    foreach (Vehicle CustomerVehicle in customerCard.VehicleList)
                     {
-                        if(vehicle.LicenseNumber == i_LicenceNumber)
+                        if (CustomerVehicle.LicenseNumber == i_LicenceNumber)
                         {
-                            return vehicle.ToString();
+                            return CustomerVehicle.ToString();
                         }
                     }
                 }
@@ -317,9 +324,9 @@ namespace Ex03.GarageLogic
         {
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
-                foreach (Vehicle vehicle in customerCard.VehicleList)
+                foreach (Vehicle CustomerVehicle in customerCard.VehicleList)
                 {
-                    if (vehicle.LicenseNumber == licenseNumber)
+                    if (CustomerVehicle.LicenseNumber == licenseNumber)
                     {
                         return true;
                         break;
@@ -330,4 +337,3 @@ namespace Ex03.GarageLogic
         }
     }
 }
-
