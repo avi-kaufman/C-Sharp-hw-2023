@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Ex03.GarageLogic
 {
-    internal class Wheels
+    internal class Wheel
     {
         private string m_Manufacturer;
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
 
-        public Wheels(string i_Manufacturer, float i_CurrentAirPressure, float i_MaxAirPressure)
+        public Wheel(string i_Manufacturer, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
             m_Manufacturer = i_Manufacturer;
             m_CurrentAirPressure = i_CurrentAirPressure;
             m_MaxAirPressure = i_MaxAirPressure;
         }
 
-        public Wheels()
+        public Wheel()
         {
         }
 
@@ -26,6 +26,7 @@ namespace Ex03.GarageLogic
         {
             m_CurrentAirPressure = m_MaxAirPressure;
         }
+
         public void AddAirPressure(float i_AirToAdd)
         {
             if (i_AirToAdd + m_CurrentAirPressure > m_MaxAirPressure || i_AirToAdd < 0)

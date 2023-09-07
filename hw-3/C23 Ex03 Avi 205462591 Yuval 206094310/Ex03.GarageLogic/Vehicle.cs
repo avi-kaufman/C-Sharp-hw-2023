@@ -81,13 +81,12 @@ namespace Ex03.GarageLogic
             set { this.m_CurrentCarStatus = value; }
         }
 
-        /// need to fix to string engine and wheels
         public override string ToString()
         {
             string wheelsListToString = "";
             for (int i = 0; i < this.Wheels.Count; i++)
             {
-                wheelsListToString += "Wheel " + (i + 1).ToString() + ": " + this.m_WheelsList[i].ToString() + "\n";
+                wheelsListToString = string.Format("{0}Wheel {1}: {2}\n", wheelsListToString, i + 1, this.m_WheelsList[i]);
             }
 
             return string.Format("ModelName: {0}\nLicenseNumber: {1}\n{2}\n{3}\nCurrentStatus: {4}", this.m_ModelName, this.m_LicenseNumber, this.Engine.ToString(), wheelsListToString, this.m_CurrentStatus);

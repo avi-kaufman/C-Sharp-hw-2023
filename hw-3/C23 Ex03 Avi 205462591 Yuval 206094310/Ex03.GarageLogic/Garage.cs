@@ -77,6 +77,7 @@ namespace Ex03.GarageLogic
             this.m_CustomerCards.Add(new CustomerCard(string i_OwnerName, string i_OwnerPhone))
             return "Added new Customer sucssesfuly."
         }
+
         //electric car
         public string AddNewVehicleToCustomerCard(string i_CustomerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
         {
@@ -90,19 +91,34 @@ namespace Ex03.GarageLogic
             }
         }
         //fule car
-        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, eCarColor i_CarColor, eNumOfDoors i_NumOfDoors)
         {
             foreach (CustomerCard customerCard in this.m_CustomerCards)
             {
                 if (customerCard.OwnerName == i_CustomerName)
                 {
-                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, i_EngineCapcity, i_FuelType, i_CarColor, i_NumOfDoors))
+                    customerCard.VehicleList.Add(new Car(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 44, Octan95, i_CarColor, i_NumOfDoors))
                     return "Added new fule car to customer card sucssesfuly."
                 }
             }
         }
 
         //electric motorcycle
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy,
+            eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
+        {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                if (customerCard.OwnerName == i_CustomerName)
+                {
+                    customerCard.VehicleList.Add(new Motorcycle(i_OwnerName, i_ModelName, i_LicenseNumber, i_CurrentEnergy, 2.4,
+                    i_LicenseType, i_EngineCapacityInCubicCentimeter))
+                    return "Added new electric motorcycle to customer card sucssesfuly."
+                }
+            }
+        }
+
+        //fule motorcycle
         public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity,
             eLicenseType i_LicenseType, int i_EngineCapacityInCubicCentimeter)
         {
@@ -110,50 +126,27 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_CustomerName)
                 {
-                }
-            } }
-
-
-        AddVehicle(string i_LicenseNumber, string i_CustomerName, details for fule motor)
-        AddVehicle(string i_LicenseNumber, string i_CustomerName, details for electric motor)
-        AddVehicle(string i_LicenseNumber, string i_CustomerName, details for fule trauck)
-
-
-
-
-
-
-
-
-
-
-        public string AddVehicl(string i_OwnerName, string i_OwnerPhone, string i_LicenceNumber)
-        {   
-            foreach (CustomerCard CustomerCard in this.m_CustomerCards)
-            {
-                for(int i = 0; i < CustomerCard.VehicleList.Count; i++)
-                {
-                    if (CustomerCard.VehicleList[i].LicenseNumber  == i_LicenceNumber)
-                    {
-                        if(CustomerCard.VehicleList[i].CurrentStatus == Vehicle.eCurrentVehicleStatus.NotFixedYet) 
-                        {
-                            return string.Format("There is already a vehicle in the garage under this lisence: {0}, and it's not fixed yet", i_LicenceNumber);
-
-                        }
-                        else
-                        {
-                            CustomerCard.VehicleList[i].CurrentStatus = Vehicle.eCurrentVehicleStatus.NotFixedYet;
-                            return string.Format("Vehicle isence: {0} added sucsesfuly.", i_LicenceNumber);
-
-                        }
-                        break;
-                    }
-                    
+                    customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, i_CurrentEnergy, i_EngineCapcity, Octan98,
+                    i_LicenseType, i_EngineCapacityInCubicCentimeter))
+                    return "Added new fule motorcycle to customer card sucssesfuly."
                 }
             }
-            // how to take the params for new car from user?
-            this.m_CustomerCards.Add(new CustomerCard(i_OwnerName, i_OwnerPhone, i_NewVehicle));
         }
+
+        //fule truck
+        public string AddNewVehicleToCustomerCard(string i_OwnerName, string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, bool i_RefrigeratedTruck, float i_CargoVolume)
+        {
+            foreach (CustomerCard customerCard in this.m_CustomerCards)
+            {
+                if (customerCard.OwnerName == i_CustomerName)
+                {
+                    customerCard.VehicleList.Add(new Truck(string i_ModelName, string i_LicenseNumber, float i_CurrentEnergy, float i_EngineCapcity, eFuelType i_FuelType, bool i_RefrigeratedTruck, float i_CargoVolume))
+                    return "Added new fule truck to customer card sucssesfuly."
+                }
+            }
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public string LicenceNumberOfVehiclesInGarage(eCurrentCarStatus CurrentStatus)
         {
