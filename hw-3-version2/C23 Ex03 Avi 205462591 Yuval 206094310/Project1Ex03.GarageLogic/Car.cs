@@ -5,7 +5,7 @@ namespace Ex03.GarageLogic
 {
     internal class Car : Vehicle
     {
-        public enum eCarColor
+        internal enum eCarColor
         {
             Black,
             White,
@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
             Blue,
         }
 
-        public enum eNumOfDoors
+        internal enum eNumOfDoors
         {
             TwoDoors = 2,
             ThreeDoors = 3,
