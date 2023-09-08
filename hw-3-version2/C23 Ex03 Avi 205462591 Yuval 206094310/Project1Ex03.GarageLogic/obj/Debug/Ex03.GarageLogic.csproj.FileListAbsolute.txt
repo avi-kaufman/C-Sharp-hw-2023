@@ -1,0 +1,2 @@
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-3-version2\C23 Ex03 Avi 205462591 Yuval 206094310\Project1Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-3-version2\C23 Ex03 Avi 205462591 Yuval 206094310\Project1Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csproj.CoreCompileInputs.cache

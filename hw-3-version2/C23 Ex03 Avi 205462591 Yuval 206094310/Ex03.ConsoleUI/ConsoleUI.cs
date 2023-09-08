@@ -108,7 +108,7 @@ namespace Ex03.ConsoleUI
                         string carNumberOfDoors = Console.ReadLine();
                         System.Console.WriteLine("Please enter the fuel type of your car");
                         string carFuelType = Console.ReadLine();
-                        Garage.AddVehicle(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carFuelType, carColor, carNumberOfDoors);
+                        Garage.AddFuleCar(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carFuelType, carColor, carNumberOfDoors);
                         break;
                     case "2":
                         System.Console.WriteLine("Please enter the car model");
@@ -119,7 +119,7 @@ namespace Ex03.ConsoleUI
                          carColor = Console.ReadLine();
                         System.Console.WriteLine("Please enter the number of doors of your car");
                          carNumberOfDoors = Console.ReadLine();
-                        Garage.AddVehicle(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
+                        m_Garage.AddElectricCar(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
                         break;
                     case "3":
                         System.Console.WriteLine("Please enter the motorcycle model");
@@ -130,7 +130,9 @@ namespace Ex03.ConsoleUI
                         string typeOfLicence = Console.ReadLine();
                         System.Console.WriteLine("Please enter the fuel type of your motorcycle");
                         string motorcyclFuelType = Console.ReadLine();
-                        Garage.AddVehicle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence);
+                        System.Console.WriteLine("Please enter the Engine capacity of your motorcycle");
+                        string EngineCapacity = Console.ReadLine();
+                        Garage.AddFuleMotorcycle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence, EngineCapacity);
                         break;
                     case "4":
                         System.Console.WriteLine("Please enter the motorcycle model");
@@ -139,7 +141,9 @@ namespace Ex03.ConsoleUI
                          motorcycleCurrentEnergy = Console.ReadLine();
                         System.Console.WriteLine("Please enter the type of your motorcycle licence");
                          typeOfLicence = Console.ReadLine();
-                        Garage.AddVehicle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence);
+                        System.Console.WriteLine("Please enter the Engine capacity of your motorcycle");
+                        string EngineCapacity = Console.ReadLine();
+                        Garage.AddEclectricMotorcycle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence, EngineCapacity);
                         break;
                     case "5":
                         System.Console.WriteLine("Please enter the trunk model");
@@ -152,7 +156,7 @@ namespace Ex03.ConsoleUI
                         string isRefrigerated = Console.ReadLine();
                         System.Console.WriteLine("What is the cargo volume?");
                         string truckCargoVolume = Console.ReadLine();
-                        Garage.AddVehicle(customerName, customerPhone, truckModel, licenceNumber, truckCurrentEnergy, trucklFuelType, isRefrigerated, truckCargoVolume);
+                        Garage.AddTruck(customerName, customerPhone, truckModel, licenceNumber, truckCurrentEnergy, isRefrigerated, truckCargoVolume);
                         break;
                 }
             }
