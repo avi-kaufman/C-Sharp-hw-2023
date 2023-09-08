@@ -133,7 +133,7 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_OwnerName)
                 {
-                    if(Enum.TryParse<eLicenseType>(i_LicenseType, true, out eLicenseType LicenseType))
+                    if (Enum.TryParse<eLicenseType>(i_LicenseType, true, out eLicenseType LicenseType))
                     {
                         customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, currentEnergy, 2.4f,
                         LicenseType, engineCpacity));
@@ -142,7 +142,10 @@ namespace Ex03.GarageLogic
                     {
                         throw new FormatException("Invalid input");
                     }
-                    
+                }
+                else
+                {
+                    throw new FormatException("Invalid name");
                 }
             }
             return "Added new electric motorcycle to customer card sucssesfuly.";
@@ -176,9 +179,15 @@ namespace Ex03.GarageLogic
                         customerCard.VehicleList.Add(new Motorcycle(i_ModelName, i_LicenseNumber, currentEnergy, 6.2f, eFuelType.Octan98,
                         LicenseType, engineCpacity));
                     }
-                   
+                    else
+                    {
+                        throw new FormatException("Invalid input");
+                    }
                 }
-                
+                else
+                {
+                    throw new FormatException("Invalid name");
+                }
             }
             return "Added new fule motorcycle to customer card sucssesfuly.";
 
@@ -204,7 +213,7 @@ namespace Ex03.GarageLogic
             {
                 if (customerCard.OwnerName == i_OwnerName)
                 {
-                    customerCard.VehicleList.Add(new Truck(i_ModelName, i_LicenseNumber, i_CurrentEnergy, 130, eFuelType.Soler, refrigeratedTruck, cargoVolume));
+                    customerCard.VehicleList.Add(new Truck(i_ModelName, i_LicenseNumber, currentEnergy, 130, eFuelType.Soler, refrigeratedTruck, cargoVolume));
                 }
             }
             return "Added new fule truck to customer card sucssesfuly.";
