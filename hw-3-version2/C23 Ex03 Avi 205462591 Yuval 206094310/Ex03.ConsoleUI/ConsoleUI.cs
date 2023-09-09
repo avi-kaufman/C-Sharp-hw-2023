@@ -5,10 +5,9 @@ namespace Ex03.ConsoleUI
 {
     public class ConsoleUI
     {
-        private Garage m_Garage = new Garage(); 
-       
         public static void UI()
         {
+            Garage m_Garage = new Garage();
             bool flag = true;
             while (flag)
             {
@@ -22,48 +21,46 @@ namespace Ex03.ConsoleUI
                  7 - Present Vehicle's data");
 
                 string userChoice = Console.ReadLine();
-                int intCoice = 0;
 
-                while (!int.TryParse(userChoice, out intCoice) || intCoice < 1 || intCoice > 7)
+                if (!int.TryParse(userChoice, out int intChoice))
                 {
-                    Console.WriteLine("Invalid input, please try again");
-                    userChoice = Console.ReadLine();
-                }
-
-                switch (userChoice)
-                {
-                    case "1":
-                        AddVehicleUI();
-                        break;
-                    case "2":
-                        LicenceNumberOfVehiclesInGarageUI();
-                        break;
-                    case "3":
-                        ChangeStateOfVehicleUI();
-                        break;
-                    case "4":
-                        PumpToMaximumAirUI();
-                        break;
-                    case "5":
-                        AddFuelUI();
-                        break;
-                    case "6":
-                        chargeElectricalVehicleUI();
-                        break;
-                    case "7":
-                        VehiclesInformationUI();
-                        break;
-                }
-
-                Console.WriteLine("If you want to reload the menu please press any key. If you want to quit press Q");
-                if (Console.ReadLine() == "Q")
-                {
-                    Environment.Exit(0);
-                }
+                    if (intChoice >= 1 && intChoice <= 7)
+                    {
+                        switch (userChoice)
+                        {
+                            case "1":
+                                AddVehicleUI(m_Garage);
+                                break;
+                            case "2":
+                                LicenceNumberOfVehiclesInGarageUI(m_Garage);
+                                break;
+                            case "3":
+                                ChangeStateOfVehicleUI(m_Garage);
+                                break;
+                            case "4":
+                                PumpToMaximumAirUI(m_Garage);
+                                break;
+                            case "5":
+                                AddFuelUI(m_Garage);
+                                break;
+                            case "6":
+                                chargeElectricalVehicleUI(m_Garage);
+                                break;
+                            case "7":
+                                VehiclesInformationUI(m_Garage);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input, please try again");
+                    }
+                }  
             }
         }
+
         ///add owner phone and add it to the functions
-        public static void AddVehicleUI()
+        public static void AddVehicleUI(Garage i_Garage)
         {
             bool flag = true;
             bool isExistInGarage = false;
@@ -75,7 +72,7 @@ namespace Ex03.ConsoleUI
                 string customerName = Console.ReadLine();
                 System.Console.WriteLine("Please enter your phone number");
                 string customerPhone = Console.ReadLine();
-                isExistInGarage = Garage.AddVehicle(licenceNumber);
+                isExistInGarage = i_Garage.AddVehicle(licenceNumber);
                 if (!isExistInGarage)
                 {
                     System.Console.WriteLine(@"What is the type of your vehicle? :
@@ -108,18 +105,18 @@ namespace Ex03.ConsoleUI
                         string carNumberOfDoors = Console.ReadLine();
                         System.Console.WriteLine("Please enter the fuel type of your car");
                         string carFuelType = Console.ReadLine();
-                        Garage.AddFuleCar(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carFuelType, carColor, carNumberOfDoors);
+                        i_Garage.AddFuleCar(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
                         break;
                     case "2":
                         System.Console.WriteLine("Please enter the car model");
-                         carModel = Console.ReadLine();
+                        carModel = Console.ReadLine();
                         System.Console.WriteLine("Please enter the amount of energy in the car");
-                         carCurrentEnergy = Console.ReadLine();
+                        carCurrentEnergy = Console.ReadLine();
                         System.Console.WriteLine("Please enter the color of your car");
-                         carColor = Console.ReadLine();
+                        carColor = Console.ReadLine();
                         System.Console.WriteLine("Please enter the number of doors of your car");
-                         carNumberOfDoors = Console.ReadLine();
-                        m_Garage.AddElectricCar(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
+                        carNumberOfDoors = Console.ReadLine();
+                        i_Garage.AddElectricCar(customerName, customerPhone, carModel, licenceNumber, carCurrentEnergy, carColor, carNumberOfDoors);
                         break;
                     case "3":
                         System.Console.WriteLine("Please enter the motorcycle model");
@@ -132,18 +129,18 @@ namespace Ex03.ConsoleUI
                         string motorcyclFuelType = Console.ReadLine();
                         System.Console.WriteLine("Please enter the Engine capacity of your motorcycle");
                         string EngineCapacity = Console.ReadLine();
-                        Garage.AddFuleMotorcycle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence, EngineCapacity);
+                        i_Garage.AddFuleMotorcycle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, motorcyclFuelType, typeOfLicence, EngineCapacity);
                         break;
                     case "4":
                         System.Console.WriteLine("Please enter the motorcycle model");
-                         motorcycleModel = Console.ReadLine();
+                        motorcycleModel = Console.ReadLine();
                         System.Console.WriteLine("Please enter how much hours of energy left in your motorcycle");
-                         motorcycleCurrentEnergy = Console.ReadLine();
+                        motorcycleCurrentEnergy = Console.ReadLine();
                         System.Console.WriteLine("Please enter the type of your motorcycle licence");
-                         typeOfLicence = Console.ReadLine();
+                        typeOfLicence = Console.ReadLine();
                         System.Console.WriteLine("Please enter the Engine capacity of your motorcycle");
-                        string EngineCapacity = Console.ReadLine();
-                        Garage.AddEclectricMotorcycle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence, EngineCapacity);
+                        string userEngineCapacity = Console.ReadLine();
+                        i_Garage.AddEclectricMotorcycle(customerName, customerPhone, motorcycleModel, licenceNumber, motorcycleCurrentEnergy, typeOfLicence, userEngineCapacity);
                         break;
                     case "5":
                         System.Console.WriteLine("Please enter the trunk model");
@@ -156,16 +153,16 @@ namespace Ex03.ConsoleUI
                         string isRefrigerated = Console.ReadLine();
                         System.Console.WriteLine("What is the cargo volume?");
                         string truckCargoVolume = Console.ReadLine();
-                        Garage.AddTruck(customerName, customerPhone, truckModel, licenceNumber, truckCurrentEnergy, isRefrigerated, truckCargoVolume);
+                        i_Garage.AddTruck(customerName, customerPhone, truckModel, licenceNumber, truckCurrentEnergy, isRefrigerated, truckCargoVolume);
                         break;
                 }
             }
         }
 
-        public static void LicenceNumberOfVehiclesInGarageUI()
+        public static void LicenceNumberOfVehiclesInGarageUI(Garage i_Garage)
         {
             bool flag = true;
-            bool validInput = false;
+            //bool validInput = false;
             while (flag)
             {
                 Console.WriteLine("Do you want to see licence number of all the vehicles in the garage? <Y/N>");
@@ -174,30 +171,30 @@ namespace Ex03.ConsoleUI
                 while (userInput != "Y" || userInput != "N")
                 {
                     Console.WriteLine("invalid input. please type <Y/N>");
-                    string userInput = Console.ReadLine();
+                    userInput = Console.ReadLine();
                 }
 
-                if (userInput = "Y")
+                if (userInput == "Y")
                 {
-                    Garage.LicenceNumberOfVehiclesInGarage();
+                    i_Garage.LicenceNumberOfVehiclesInGarage();
                     flag = false;
-                    validInput = false;
+                    //validInput = false;
                 }
                 else
                 {
-                    if (userInput = "N")
+                    if (userInput == "N")
                     {
                         Console.WriteLine("Please enter a vehicle status");
-                        string userInput = Console.ReadLine();
-                        Garage.LicenceNumberOfVehiclesInGarage(userInput);
+                        userInput = Console.ReadLine();
+                        i_Garage.LicenceNumberOfVehiclesInGarage(userInput);
                         flag = false;
-                        validInput = false;
+                        //validInput = false;
                     }
                 }
             }
         }
 
-        public static void ChangeStateOfVehicleUI()
+        public static void ChangeStateOfVehicleUI(Garage i_Garage)
         {
             bool flag = true;
             while (flag)
@@ -208,7 +205,7 @@ namespace Ex03.ConsoleUI
                 string newState = Console.ReadLine();
                 try
                 {
-                    Garage.ChangeStateOfVehicle(licenceNumber, newState)
+                    i_Garage.ChangeStateOfVehicle(licenceNumber, newState);
                     flag = false;
                 }
                 catch (Exception e)
@@ -220,16 +217,16 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("The vhiecle status has been changed.");
         }
 
-        public static void PumpToMaximumAirUI()
+        public static void PumpToMaximumAirUI(Garage i_Garage)
         {
-            bool flag = true
+            bool flag = true;
             while (flag)
             {
                 Console.WriteLine("Please type a vhiecle licence number.");
                 string LicenceNumber = Console.ReadLine();
                 try
                 {
-                    Garage.PumpToMaximumAir(LicenceNumber);
+                    i_Garage.PumpToMaximumAir(LicenceNumber);
                     flag = false;
                 }
                 catch (Exception e)
@@ -241,7 +238,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("All the wheels pumped to max, thank you.");
         }
 
-        public static void AddFuelUI()
+        public static void AddFuelUI(Garage i_Garage)
         {
             bool flag = true;
             while (flag)
@@ -254,7 +251,7 @@ namespace Ex03.ConsoleUI
                 string fuelToAdd = Console.ReadLine();
                 try
                 {
-                    Garage.AddFuel(licenceNumber, typeOfFuel, fuelToAdd);
+                    i_Garage.AddFuel(licenceNumber, typeOfFuel, fuelToAdd);
                     flag = false;
                 }
                 catch (Exception e)
@@ -265,9 +262,9 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void chargeElectricalVehicleUI()
+        public static void chargeElectricalVehicleUI(Garage i_Garage)
         {
-            bool flag = true
+            bool flag = true;
             while (flag)
             {
                 Console.WriteLine("Please type a vhiecle licence number.");
@@ -276,7 +273,7 @@ namespace Ex03.ConsoleUI
                 string hoursToCharge = Console.ReadLine();
                 try
                 {
-                    Garage.ChargeEngine(licenceNumber, hoursToCharge);
+                    i_Garage.ChargeEngine(licenceNumber, hoursToCharge);
                     flag = false;
 
                 }
@@ -288,16 +285,16 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void VehiclesInformationUI()
+        public static void VehiclesInformationUI(Garage i_Garage)
         {
-            bool flag = true
+            bool flag = true;
             while (flag)
             {
                 Console.WriteLine("Plaese type a vhiecle licence number.");
                 string licenceNumber = Console.ReadLine();
                 try
                 {
-                    Garage.VehiclesInformation(licenceNumber);
+                    i_Garage.VehiclesInformation(licenceNumber);
                     flag = false;
                 }
                 catch (Exception e)
@@ -307,3 +304,5 @@ namespace Ex03.ConsoleUI
                 }
             }
         }
+    }
+}
