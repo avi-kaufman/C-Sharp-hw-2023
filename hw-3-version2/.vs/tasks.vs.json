@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-Project1Ex03",
+      "appliesTo": "C23 Ex03 Avi 205462591 Yuval 206094310/Project1Ex03.GarageLogic/",
+      "type": "launch"
+    }
+  ]
+}
