@@ -12,7 +12,8 @@ namespace Ex04.Menus
 
         public static void ShowCurrentDate()
         {
-            Console.WriteLine(DateTime.Now.ToString("dddd , MMM dd yyyy"));
+            Console.WriteLine("The date is now: {0}", DateTime.Now.ToString("dddd, MMM dd yyyy", System.Globalization.CultureInfo.InvariantCulture));
+
         }
     }
 }

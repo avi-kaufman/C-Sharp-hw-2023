@@ -1,0 +1,14 @@
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\obj\Debug\Ex04.Menus.Testing.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\obj\Debug\Ex04.Menus.Testing.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Testing.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Delegates.dll
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Interfaces.dll
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Delegates.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Delegates.dll.config
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Interfaces.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Interfaces.dll.config
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\obj\Debug\Ex04.Menus.Testing.csproj.CopyComplete
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\obj\Debug\Ex04.Menus.Testing.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Testing.exe.config
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\bin\Debug\Ex04.Menus.Testing.exe
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Testing\obj\Debug\Ex04.Menus.Testing.exe

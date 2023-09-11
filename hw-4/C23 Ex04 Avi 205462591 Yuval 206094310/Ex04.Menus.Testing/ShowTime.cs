@@ -12,7 +12,7 @@ namespace Ex04.Menus.Testing
 
         public static void ShowCurrentTime()
         {
-            Console.WriteLine(DateTime.Now.ToString("hh:mm:ss"));
+            Console.WriteLine("The Hour is now: {0}", DateTime.Now.ToString("hh:mm:ss"));
         }
     }
 }
