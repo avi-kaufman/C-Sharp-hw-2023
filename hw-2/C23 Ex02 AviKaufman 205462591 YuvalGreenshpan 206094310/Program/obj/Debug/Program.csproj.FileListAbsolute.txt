@@ -1,0 +1,2 @@
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Program\obj\Debug\Program.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Program\obj\Debug\Program.csproj.CoreCompileInputs.cache

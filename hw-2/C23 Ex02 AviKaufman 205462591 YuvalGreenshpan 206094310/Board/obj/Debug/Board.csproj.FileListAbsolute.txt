@@ -1,0 +1,14 @@
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\Board.dll.config
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\Board.dll
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\Board.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\Guess.dll
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\SecretCode.dll
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\Guess.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\Guess.dll.config
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\SecretCode.pdb
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\bin\Debug\SecretCode.dll.config
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\obj\Debug\Board.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\obj\Debug\Board.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\obj\Debug\Board.csproj.CopyComplete
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\obj\Debug\Board.dll
+C:\Users\User\Desktop\school\third_year\c#_hw\hw-2\C23 Ex02 AviKaufman 205462591 YuvalGreenshpan 206094310\Board\obj\Debug\Board.pdb

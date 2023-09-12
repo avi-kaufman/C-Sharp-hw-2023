@@ -1,7 +1,0 @@
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\obj\Debug\Ex04.Menus.Delegates.csproj.AssemblyReference.cache
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\obj\Debug\Ex04.Menus.Delegates.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\bin\Debug\Ex04.Menus.Delegates.dll.config
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\bin\Debug\Ex04.Menus.Delegates.dll
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\bin\Debug\Ex04.Menus.Delegates.pdb
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\obj\Debug\Ex04.Menus.Delegates.dll
-C:\Users\User\Desktop\school\third_year\c#_hw\hw-4\C23 Ex04 Avi 205462591 Yuval 206094310\Ex04.Menus.Delegates\obj\Debug\Ex04.Menus.Delegates.pdb
