@@ -1,14 +1,16 @@
-﻿namespace Ex02
+﻿using System.Windows.Forms;
+
+namespace Ex05
 {
     public class Program
     {
         public static void Main()
         {
-            Game game = new Game();
-            do
             {
-                game.PlayGame();
-            } while (game.ContinuePlay);
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FormSettings());
+            }
         }
     }
 }
